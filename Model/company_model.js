@@ -2,7 +2,6 @@ let mongoose=require("mongoose")
 const joi=require("joi")
 
 let companySchema=mongoose.Schema({
-        CompanyID:String,
         Fullname:String,
         Address:String,
         Email:String,
@@ -18,7 +17,6 @@ let companySchema=mongoose.Schema({
         timeStamps:true
 })
  let companyJoi=joi.object({
-        CompanyID:joi.string().required(),
         Fullname:joi.string().required(),
         Address:joi.string().required(),
         Email:joi.string().required(),

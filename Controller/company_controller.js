@@ -37,11 +37,11 @@ const companyLogin=(req,res)=>{
         {
         let token=jwt.sign({Email:data.Email,Password:data.Password},'abd') 
         console.log(token)   
-        res.send({message:"login successfully",token})
+        res.send({isSuccess:true,message:"login successfully",token})
         }
         else
         {
-            res.send({message:"user and password is incorrect"})
+            res.send({isSuccess:false,message:"user and password is incorrect"})
         }
     })
     .catch((err2)=>{
