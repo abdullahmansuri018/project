@@ -70,7 +70,7 @@ const createContest=(req,res)=>{
 } 
 
 const getAllContest=((req,res)=>{
-    contestModel.find()
+    contestModel.find({Fullname:req.body.Fullname})
     .then((data)=>{
         console.log({message:"contest retrieved"})
         res.send({data})
