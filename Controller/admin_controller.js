@@ -126,7 +126,7 @@ const giveResults=((req,res)=>{
     participatedModel.find({contestID:req.body.contestID}).populate("contestID")
     .then(async(data)=>{
         let maxnumber=data[0].contestID.NoOfTickets
-        let winnerNO=data[0].contestID.NoOfProducts
+        let winnerNO=data[0].contestID.NoOfwinner
         // console.log(winnerNO)
         // console.log(maxnumber)
        let UniqueRandomNumbers = generateUniqueRandomNumbers(0,maxnumber-1, winnerNO)
