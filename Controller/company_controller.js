@@ -10,7 +10,7 @@ const companyRegistration=(req,res)=>{
     if(error)
     {
         console.log(error)
-        res.send({message:"validate error"})
+        res.send({message:"validate error",error})
     }
     else{
         value.Password=encryptedPassword
@@ -21,7 +21,7 @@ const companyRegistration=(req,res)=>{
         })
         .catch((err)=>{
             console.log(err)
-            res.send({message:"error in registaring company details"})
+            res.send({message:"error in registaring company details",err})
         })
 
     }
@@ -46,7 +46,7 @@ const companyLogin=(req,res)=>{
     })
     .catch((err2)=>{
         console.log(err2)
-        res.send({message:"error in retreiving data"})
+        res.send({message:"error in retreiving data",err2})
     })
 }
 
@@ -63,23 +63,36 @@ const createContest=(req,res)=>{
         console.log(ok)
         res.send({message:"contest created"})
     })
-    .catch((err)=>{
-        console.log(err)
-        res.send({message:"error in creating contest"})
+    .catch((err3)=>{
+        console.log(err3)
+        res.send({message:"error in creating contest",err3})
     })
 } 
 
-const getAllContest=((req,res)=>{
+const getcompanyContest=((req,res)=>{
     contestModel.find({Fullname:req.body.Fullname})
     .then((data)=>{
         console.log({message:"contest retrieved"})
         res.send({data})
     })
-    .catch((err1)=>{
-        console.log(err1)
-        res.send({message:"error in retrieving contest"})
+    .catch((err4)=>{
+        console.log(err4)
+        res.send({message:"error in retrieving contest",err4})
     })
     
 })
 
-module.exports={companyRegistration,companyLogin,createContest,getAllContest}
+const updateCompanyContest=(req,res)=>{
+    contestModel.updateOne({_id:req.query.id,},req.body)
+    .then((data)=>{
+        res.send({message:"contest updated",data})
+    })
+    .catch((err5)=>{
+        console.log(err5)
+        res.send({message:"error in updating from company",err5})
+    })
+}
+
+
+
+module.exports={companyRegistration,companyLogin,createContest,getcompanyContest,updateCompanyContest}

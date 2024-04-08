@@ -1,6 +1,6 @@
 const express=require("express")
 let router=express.Router();
-let {companyRegistration,companyLogin,createContest,getAllContest}=require("../Controller/company_controller")
+let {companyRegistration,companyLogin,createContest,getcompanyContest,updateCompanyContest}=require("../Controller/company_controller")
 const jwt=require('jsonwebtoken')
 
 const mw=(req,res,next)=>{
@@ -30,7 +30,8 @@ const mw=(req,res,next)=>{
 router.post("/companyRegistration",companyRegistration)
 router.post("/companyLogin",companyLogin)
 router.post("/createContest",mw,createContest)
-router.get("/getAllContest",mw,getAllContest)
+router.get("/getcompanyContest",mw,getcompanyContest)
+router.put("/updateCompanyContest",updateCompanyContest)
 
 
 module.exports=router

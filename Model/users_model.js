@@ -13,8 +13,8 @@ let usersSchema=mongoose.Schema({
         Country:String,
         Username:String,
         Password:String,
-        confirmPass:String,
-        isDeleted:{type:Boolean,default:false}
+        isDeleted:{type:Boolean,default:false},
+        isWinner:{type:Boolean,default:false}
 
 },
 {
@@ -31,8 +31,7 @@ let usersSchema=mongoose.Schema({
         State:joi.string().required(),
         Country:joi.string().required(),
         Username:joi.string().required(),
-        Password:joi.string().required(),
-        confirmPass:joi.string().required()
+        Password:joi.string().required()
  })
 
 

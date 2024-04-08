@@ -1,6 +1,6 @@
 const express=require("express")
 let router=express.Router();
-let {usersRegistration,usersLogin,getAllContest}=require("../Controller/users_controller")
+let {usersRegistration,usersLogin,getAlluserContest,userParticipated,getuserParticipation}=require("../Controller/users_controller")
 const jwt=require('jsonwebtoken')
 const mw=(req,res,next)=>{
     let token=req.headers.authorization.split(" ")[1]
@@ -27,6 +27,8 @@ const mw=(req,res,next)=>{
 }
 router.post("/usersRegistration",usersRegistration)
 router.post("/usersLogin",usersLogin)
-router.get("/getAllContest",mw,getAllContest)
+router.get("/getAlluserContest",mw,getAlluserContest)
+router.post("/userParticipated",userParticipated)
+router.get("/getuserParticipation",getuserParticipation)
 
 module.exports=router

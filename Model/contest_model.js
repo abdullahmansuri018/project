@@ -8,7 +8,8 @@ let contestSchema=mongoose.Schema({
     NoOfTickets:Number,
     NoOfProducts:Number,
     ProductCost:Number,
-    status:String
+    status:String,
+    isDeleted:{type:Boolean,default:false}
 })
 
 let contestJoi=joi.object({

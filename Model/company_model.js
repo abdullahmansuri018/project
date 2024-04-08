@@ -8,9 +8,9 @@ let companySchema=mongoose.Schema({
         PhoneNumber:Number,
         alternatePhoneNumber:Number,
         GSTno:Number,
+        comapnyLogo:String,
         companyCategory:String,
         Password:String,
-        confirmPass:String,
         isDeleted:{type:Boolean,default:false}
 },
 {
@@ -23,9 +23,9 @@ let companySchema=mongoose.Schema({
         PhoneNumber:joi.number().required(),
         alternatePhoneNumber:joi.number().required(),
         GSTno:joi.number().required(),
+        comapnyLogo:joi.string(),
         companyCategory:joi.string().required(),
-        Password:joi.string().required(),
-        confirmPass:joi.string().required()
+        Password:joi.string().required()
  })
 
 

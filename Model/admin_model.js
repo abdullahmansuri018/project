@@ -4,6 +4,7 @@ const joi=require("joi")
 let adminSchema=mongoose.Schema({
         Email:String,
         Password:String,
+        isDeleted:{type:Boolean,default:false}
 })
  let adminJoi=joi.object({
         Email:joi.string().required(),
