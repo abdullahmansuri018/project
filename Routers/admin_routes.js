@@ -29,8 +29,8 @@ const mw=(req,res,next)=>{
 router.post("/adminRegistration",adminRegistration)
 router.post("/adminLogin",adminLogin)
 router.get("/getAlladminContest",getAlladminContest)
-router.put("/updateContest",mw,updateContest)
-router.get("/approvedcontest",mw,approvedcontest)
+router.put("/updateContest",updateContest)
+router.get("/approvedcontest",approvedcontest)
 router.get("/getparticipatedData",getparticipatedData)
 router.get("/giveResults",giveResults)
 

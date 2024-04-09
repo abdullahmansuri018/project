@@ -7,6 +7,7 @@ const mw=(req,res,next)=>{
     if(token!=null)
     {
         try{
+            
             let correctToken=jwt.verify(token,'abd')
             if(correctToken!=null)
             {next()}
@@ -27,7 +28,7 @@ const mw=(req,res,next)=>{
 }
 router.post("/usersRegistration",usersRegistration)
 router.post("/usersLogin",usersLogin)
-router.get("/getAlluserContest",mw,getAlluserContest)
+router.get("/getAlluserContest",getAlluserContest)
 router.post("/userParticipated",userParticipated)
 router.get("/getuserParticipation",getuserParticipation)
 

@@ -29,8 +29,8 @@ const mw=(req,res,next)=>{
 
 router.post("/companyRegistration",companyRegistration)
 router.post("/companyLogin",companyLogin)
-router.post("/createContest",mw,createContest)
-router.get("/getcompanyContest",mw,getcompanyContest)
+router.post("/createContest",createContest)
+router.get("/getcompanyContest",getcompanyContest)
 router.put("/updateCompanyContest",updateCompanyContest)
 
 
