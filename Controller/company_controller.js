@@ -1,4 +1,4 @@
-const {default:monoose}=require("mongoose")
+const {default:mongoose}=require("mongoose")
 const{companyModel,companyJoi}=require("../Model/company_model")
 let bcrypt=require("bcrypt")
 let jwt=require("jsonwebtoken")
@@ -51,6 +51,7 @@ const companyLogin=(req,res)=>{
 }
 
 const createContest=(req,res)=>{
+    console.log(req.body)
     const {error,value}=contestJoi.validate(req.body)
     if(error)
     {
@@ -66,11 +67,12 @@ const createContest=(req,res)=>{
     .catch((err3)=>{
         console.log(err3)
         res.send({message:"error in creating contest",err3})
+        return;
     })
 } 
 
 const getcompanyContest=((req,res)=>{
-    contestModel.find({Fullname:req.body.Fullname})
+    contestModel.find({isDeleted:false}).select("productName ProductSummary NoOfTickets NoOfwinner ProductCost")
     .then((data)=>{
         console.log({message:"contest retrieved"})
         res.send({data})
@@ -83,7 +85,7 @@ const getcompanyContest=((req,res)=>{
 })
 
 const updateCompanyContest=(req,res)=>{
-    contestModel.updateOne({_id:req.query.id,},req.body)
+    contestModel.updateOne({_id:req.query.id},req.body)
     .then((data)=>{
         res.send({message:"contest updated",data})
     })
@@ -93,6 +95,16 @@ const updateCompanyContest=(req,res)=>{
     })
 }
 
+const deletecompanyContest=(req,res)=>{
+    contestModel.updateOne({_id:req.query.id},{isDeleted:true})
+    .then((data)=>{
+        res.send({message:"contest deleted"})
+    })
+    .catch((err6)=>{
+        console.log(err6)
+        res.send({message:"error in deleting contest",err6})
+    })
+}
 
 
-module.exports={companyRegistration,companyLogin,createContest,getcompanyContest,updateCompanyContest}
+module.exports={companyRegistration,companyLogin,createContest,getcompanyContest,updateCompanyContest,deletecompanyContest}

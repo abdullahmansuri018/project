@@ -37,11 +37,11 @@ const adminLogin=(req,res)=>{
             if(check==true)
             {
             let token=jwt.sign({Email:data.Email,Password:data.Password},'abd')    
-            res.send({message:"login successfully",token})
+            res.send({isSuccess:true,message:"login successfully",token})
             }
             else
             {
-                res.send({message:"email and password is incorrect"})
+                res.send({isSuccess:false,message:"email and password is incorrect"})
             }
         })
         .catch((err2)=>{
@@ -51,7 +51,7 @@ const adminLogin=(req,res)=>{
 }
 
 const getAlladminContest=((req,res)=>{
-    contestModel.find({status:"approved"})
+    contestModel.find({isDeleted:false}).select("productName ProductSummary NoOfTickets NoOfwinner ProductCost")
     .then((data)=>{
         console.log({message:"contest retrieved"})
         res.send({data})
@@ -65,13 +65,24 @@ const getAlladminContest=((req,res)=>{
 
 
 const updateContest=(req,res)=>{
-    contestModel.updateOne({_id:req.query._id,},{status:"approved"})
+    contestModel.updateOne({_id:req.query.id},{status:"approved"})
     .then((data)=>{
         res.send({message:"contest updated",data})
     })
     .catch((err3)=>{
         console.log(err3)
         res.send({message:"error in updating from admin",err3})
+    })
+}
+
+const rejectContest=(req,res)=>{
+    contestModel.updateOne({_id:req.query.id},{status:"reject"})
+    .then((data)=>{
+        res.send({message:"contest updated",data})
+    })
+    .catch((err3)=>{
+        console.log(err3)
+        res.send({message:"error in rejecting from admin",err3})
     })
 }
 
@@ -83,6 +94,17 @@ const approvedcontest=(req,res)=>{
     .catch((err4)=>{
         console.log(err4)
         res.send({message:"error in showing approved contest",err4})
+    })
+}
+
+const showrejectedcontest=(req,res)=>{
+    contestModel.find({status:"reject"})
+    .then((data)=>{
+        res.send({data})
+    })
+    .catch((err7)=>{
+        console.log(err7)
+        res.send({message:"error in showing rejected contest",err7})
     })
 }
 
@@ -152,4 +174,4 @@ const getUserFromUserId = async (userId)=>{
     console.log("data----", data)
     return data[0]
 }
-module.exports={adminRegistration,adminLogin,getAlladminContest,updateContest,approvedcontest,getparticipatedData,giveResults}
+module.exports={adminRegistration,adminLogin,getAlladminContest,updateContest,approvedcontest,rejectContest,showrejectedcontest,getparticipatedData,giveResults}
